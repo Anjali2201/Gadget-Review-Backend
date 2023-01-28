@@ -14,8 +14,8 @@ app.use("/api/user", router);
 
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => app.listen(3000))
+  .then(() => app.listen(5000))
   .then(() =>
-    console.log("Connected TO Database and Listening TO Localhost 3000")
+    console.log("Connected TO Database and Listening TO Localhost 5000")
   )
   .catch((err) => console.log(err));
