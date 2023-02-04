@@ -46,6 +46,7 @@ export const signup = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
+
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
@@ -60,7 +61,21 @@ export const login = async (req, res, next) => {
   if (!isPasswordCorrect) {
     return res.status(400).json({ message: "Incorrect Password" });
   }
-  return res
-    .status(200)
-    .json({ message: "Login Successfull", user: existingUser });
+  return res.status(200).json({
+    message: "Login Successfull",
+    user: existingUser,
+  });
+};
+
+export const userProfile = async (req, res, next) => {
+  let user;
+  try {
+    user = await User.findById(req.params.id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!user) {
+    return res.status(404).json({ message: "User Not Found" });
+  }
+  return res.status(200).json({ user });
 };
