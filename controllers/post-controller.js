@@ -107,3 +107,32 @@ export const getpostbyusername = async (req, res, next) => {
   }
   return res.status(200).json({ posts });
 };
+
+export const getpostbycategory = async (req, res, next) => {
+  const { category } = req.body;
+  let posts;
+  try {
+    posts = await Post.find({ category: category });
+  } catch (err) {
+    console.log(err);
+  }
+  if (!posts) {
+    return res.status(404).json({ message: "No Posts Found" });
+  }
+  return res.status(200).json({ posts });
+};
+
+export const getcount = async (req, res, next) => {
+  let postcount;
+  try {
+    postcount = await Post.countDocuments();
+  } catch (err) {
+    console.log(err);
+  }
+  if (!postcount) {
+    return res.status(404).json({ message: "No Data Found" });
+  }
+  return res.status(200).json({ postcount });
+};
+
+
