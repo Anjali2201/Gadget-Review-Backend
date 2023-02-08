@@ -14,24 +14,56 @@ export const getAllPost = async (req, res, next) => {
 };
 
 export const createPost = async (req, res, next) => {
+  // authoremail: {
+  //   type: String,
+  //   required: true,
+  // },
+  // authorname: {
+  //   type: String,
+  //   required: true,
+  // },
+  // gadgetname: {
+  //   type: String,
+  //   required: true,
+  // },
+  // category: {
+  //   type: String,
+  //   required: true,
+  // },
+  // model: {
+  //   type: String,
+  //   required: true,
+  // },
+  // price: {
+  //   type: String,
+  //   required: true,
+  // },
+  // review: {
+  //   type: String,
+  //   required: true,
+  // },
+  // rate: {
+  //   type: String,
+  //   required: true,
+  // },
   const {
     authoremail,
+    authorname,
     gadgetname,
     category,
     model,
-    link,
     price,
-    description,
+    review,
     rate,
   } = req.body;
   const post = new Post({
     authoremail,
+    authorname,
     gadgetname,
     category,
     model,
-    link,
     price,
-    description,
+    review,
     rate,
   });
   try {

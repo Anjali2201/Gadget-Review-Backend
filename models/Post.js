@@ -7,6 +7,10 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
+  authorname: {
+    type: String,
+    required: true,
+  },
   gadgetname: {
     type: String,
     required: true,
@@ -19,19 +23,14 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  link: {
-    type: String,
-    required: true,
-  },
   price: {
     type: String,
     required: true,
   },
-  description: {
+  review: {
     type: String,
     required: true,
   },
-
   rate: {
     type: String,
     required: true,
