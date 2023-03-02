@@ -135,4 +135,63 @@ export const getcount = async (req, res, next) => {
   return res.status(200).json({ postcount });
 };
 
+export const likepost = async (req, res, next) => {
+  const { id } = req.params;
+  let post;
+  try {
+    post = await Post.findById(id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!post) {
+    return res.status(404).json({ message: "Couldnt Find Post By This ID" });
+  }
+  try {
+    post.likes = post.likes + 1;
+    await post.save();
+  } catch (err) {
+    return console.log(err);
+  }
+  return res.status(200).json({ message: "Post Liked" });
+};
 
+export const dislikepost = async (req, res, next) => {
+  const { id } = req.params;
+  let post;
+  try {
+    post = await Post.findById(id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!post) {
+    return res.status(404).json({ message: "Couldnt Find Post By This ID" });
+  }
+  try {
+    post.dislikes = post.dislikes + 1;
+    await post.save();
+  } catch (err) {
+    return console.log(err);
+  }
+  return res.status(200).json({ message: "Post Disliked" });
+};
+
+export const comments = async (req, res, next) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+  let post;
+  try {
+    post = await Post.findById(id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!post) {
+    return res.status(404).json({ message: "Couldnt Find Post By This ID" });
+  }
+  try {
+    post.comments.push(comment);
+    await post.save();
+  } catch (err) {
+    return console.log(err);
+  }
+  return res.status(200).json({ message: "Comment Added" });
+};
