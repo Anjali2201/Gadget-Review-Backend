@@ -1,5 +1,6 @@
 import Post from "../models/Post";
 
+// ---------------------- All Posts ----------------------
 export const getAllPost = async (req, res, next) => {
   let posts;
   try {
@@ -13,39 +14,8 @@ export const getAllPost = async (req, res, next) => {
   return res.status(200).json({ posts });
 };
 
+// ----------------------- Create Post -----------------------
 export const createPost = async (req, res, next) => {
-  // authoremail: {
-  //   type: String,
-  //   required: true,
-  // },
-  // authorname: {
-  //   type: String,
-  //   required: true,
-  // },
-  // gadgetname: {
-  //   type: String,
-  //   required: true,
-  // },
-  // category: {
-  //   type: String,
-  //   required: true,
-  // },
-  // model: {
-  //   type: String,
-  //   required: true,
-  // },
-  // price: {
-  //   type: String,
-  //   required: true,
-  // },
-  // review: {
-  //   type: String,
-  //   required: true,
-  // },
-  // rate: {
-  //   type: String,
-  //   required: true,
-  // },
   const {
     authoremail,
     authorname,
@@ -74,6 +44,7 @@ export const createPost = async (req, res, next) => {
   return res.status(201).json({ post });
 };
 
+// ----------------------- Delete Post -----------------------
 export const deletePost = async (req, res, next) => {
   const { id } = req.params;
 
@@ -94,6 +65,7 @@ export const deletePost = async (req, res, next) => {
   return res.status(200).json({ message: "Post Deleted" });
 };
 
+// ----------------------- Get Post by username -----------------------
 export const getpostbyusername = async (req, res, next) => {
   const { email } = req.body;
   let posts;
@@ -107,6 +79,8 @@ export const getpostbyusername = async (req, res, next) => {
   }
   return res.status(200).json({ posts });
 };
+
+// ----------------------- Get Post by category -----------------------
 
 export const getpostbycategory = async (req, res, next) => {
   const { category } = req.body;
@@ -122,6 +96,7 @@ export const getpostbycategory = async (req, res, next) => {
   return res.status(200).json({ posts });
 };
 
+// ----------------------- Get Post Count -----------------------
 export const getcount = async (req, res, next) => {
   let postcount;
   try {
@@ -135,6 +110,7 @@ export const getcount = async (req, res, next) => {
   return res.status(200).json({ postcount });
 };
 
+// ----------------------- Likes Count -----------------------
 export const likepost = async (req, res, next) => {
   const { id } = req.params;
   let post;
@@ -155,6 +131,7 @@ export const likepost = async (req, res, next) => {
   return res.status(200).json({ message: "Post Liked" });
 };
 
+// ----------------------- Dislikes Count -----------------------
 export const dislikepost = async (req, res, next) => {
   const { id } = req.params;
   let post;
@@ -174,6 +151,8 @@ export const dislikepost = async (req, res, next) => {
   }
   return res.status(200).json({ message: "Post Disliked" });
 };
+
+// ----------------------- Comments -----------------------
 
 export const comments = async (req, res, next) => {
   const { id } = req.params;
