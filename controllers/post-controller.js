@@ -26,6 +26,7 @@ export const createPost = async (req, res, next) => {
     review,
     rate,
   } = req.body;
+  let likes = 0;
   const post = new Post({
     authoremail,
     authorname,
@@ -35,6 +36,7 @@ export const createPost = async (req, res, next) => {
     price,
     review,
     rate,
+    likes,
   });
   try {
     await post.save();
@@ -110,26 +112,26 @@ export const getcount = async (req, res, next) => {
   return res.status(200).json({ postcount });
 };
 
-// // ----------------------- Likes Count -----------------------
-// export const likepost = async (req, res, next) => {
-//   const { id } = req.params;
-//   let post;
-//   try {
-//     post = await Post.findById(id);
-//   } catch (err) {
-//     return console.log(err);
-//   }
-//   if (!post) {
-//     return res.status(404).json({ message: "Couldnt Find Post By This ID" });
-//   }
-//   try {
-//     post.likes = post.likes + 1;
-//     await post.save();
-//   } catch (err) {
-//     return console.log(err);
-//   }
-//   return res.status(200).json({ message: "Post Liked" });
-// };
+// ----------------------- Likes Count -----------------------
+export const likepost = async (req, res, next) => {
+  const { id } = req.params;
+  let post;
+  try {
+    post = await Post.findById(id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!post) {
+    return res.status(404).json({ message: "Couldnt Find Post By This ID" });
+  }
+  try {
+    post.likes = post.likes + 1;
+    await post.save();
+  } catch (err) {
+    return console.log(err);
+  }
+  return res.status(200).json({ message: "Post Liked" });
+};
 
 // // ----------------------- Dislikes Count -----------------------
 // export const dislikepost = async (req, res, next) => {
@@ -154,23 +156,23 @@ export const getcount = async (req, res, next) => {
 
 // // ----------------------- Comments -----------------------
 
-// export const comments = async (req, res, next) => {
-//   const { id } = req.params;
-//   const { comment } = req.body;
-//   let post;
-//   try {
-//     post = await Post.findById(id);
-//   } catch (err) {
-//     return console.log(err);
-//   }
-//   if (!post) {
-//     return res.status(404).json({ message: "Couldnt Find Post By This ID" });
-//   }
-//   try {
-//     post.comments.push(comment);
-//     await post.save();
-//   } catch (err) {
-//     return console.log(err);
-//   }
-//   return res.status(200).json({ message: "Comment Added" });
-// };
+export const comments = async (req, res, next) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+  let post;
+  try {
+    post = await Post.findById(id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!post) {
+    return res.status(404).json({ message: "Couldnt Find Post By This ID" });
+  }
+  try {
+    post.comments.push(comment);
+    await post.save();
+  } catch (err) {
+    return console.log(err);
+  }
+  return res.status(200).json({ message: "Comment Added" });
+};
