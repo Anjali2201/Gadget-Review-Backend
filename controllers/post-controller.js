@@ -119,7 +119,6 @@ export const likepost = async (req, res, next) => {
   const { id } = req.params;
   const { email } = req.body;
   let post;
-  let likes = 0;
   try {
     post = await Post.findById(id);
   } catch (err) {
@@ -132,16 +131,14 @@ export const likepost = async (req, res, next) => {
     if (post.likedUser.includes(email)) {
       post.likedUser.pop(email);
       await post.save();
-      likes = post.likedUser.length;
-      return res.status(200).json({ message: "Post Unliked", likes });
+      return res.status(200).json({ message: "Unliked" });
     }
     post.likedUser.push(email);
     await post.save();
-    likes = post.likedUser.length;
   } catch (err) {
     return console.log(err);
   }
-  return res.status(200).json({ message: "Post Liked", likes });
+  return res.status(200).json({ message: "Liked" });
 };
 
 // ----------------------- Comments -----------------------
