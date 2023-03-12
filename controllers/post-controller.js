@@ -26,7 +26,8 @@ export const createPost = async (req, res, next) => {
     review,
     rate,
   } = req.body;
-  let likes = 0;
+  const likedUser = [];
+  const comments = [];
   const post = new Post({
     authoremail,
     authorname,
@@ -36,7 +37,8 @@ export const createPost = async (req, res, next) => {
     price,
     review,
     rate,
-    likes,
+    likedUser,
+    comments,
   });
   try {
     await post.save();
@@ -115,7 +117,9 @@ export const getcount = async (req, res, next) => {
 // ----------------------- Likes Count -----------------------
 export const likepost = async (req, res, next) => {
   const { id } = req.params;
+  const { email } = req.body;
   let post;
+  let likes = 0;
   try {
     post = await Post.findById(id);
   } catch (err) {
@@ -125,41 +129,29 @@ export const likepost = async (req, res, next) => {
     return res.status(404).json({ message: "Couldnt Find Post By This ID" });
   }
   try {
-    post.likes = post.likes + 1;
+    if (post.likedUser.includes(email)) {
+      post.likedUser.pop(email);
+      await post.save();
+      likes = post.likedUser.length;
+      return res.status(200).json({ message: "Post Unliked", likes });
+    }
+    post.likedUser.push(email);
     await post.save();
+    likes = post.likedUser.length;
   } catch (err) {
     return console.log(err);
   }
-  return res.status(200).json({ message: "Post Liked" });
+  return res.status(200).json({ message: "Post Liked", likes });
 };
 
-// // ----------------------- Dislikes Count -----------------------
-// export const dislikepost = async (req, res, next) => {
-//   const { id } = req.params;
-//   let post;
-//   try {
-//     post = await Post.findById(id);
-//   } catch (err) {
-//     return console.log(err);
-//   }
-//   if (!post) {
-//     return res.status(404).json({ message: "Couldnt Find Post By This ID" });
-//   }
-//   try {
-//     post.dislikes = post.dislikes + 1;
-//     await post.save();
-//   } catch (err) {
-//     return console.log(err);
-//   }
-//   return res.status(200).json({ message: "Post Disliked" });
-// };
-
-// // ----------------------- Comments -----------------------
+// ----------------------- Comments -----------------------
 
 export const comments = async (req, res, next) => {
   const { id } = req.params;
-  const { comment } = req.body;
+  const { email, comment } = req.body;
   let post;
+  let totalcomments = 0;
+  let allcomments = [];
   try {
     post = await Post.findById(id);
   } catch (err) {
@@ -169,10 +161,14 @@ export const comments = async (req, res, next) => {
     return res.status(404).json({ message: "Couldnt Find Post By This ID" });
   }
   try {
-    post.comments.push(comment);
+    post.comments.push({ email, comment });
     await post.save();
+    totalcomments = post.comments.length;
+    allcomments = post.comments;
   } catch (err) {
     return console.log(err);
   }
-  return res.status(200).json({ message: "Comment Added" });
+  return res
+    .status(200)
+    .json({ message: "Comment Added", totalcomments, allcomments });
 };

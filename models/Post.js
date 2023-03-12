@@ -35,11 +35,19 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  likes: {
-    type: Number,
+  likedUser: {
+    type: Array,
   },
   comments: {
     type: Array,
+    comment: {
+      type: String,
+      required: true,
+    },
+    commenter: {
+      type: String,
+      required: true,
+    },
   },
 });
 
