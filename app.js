@@ -12,8 +12,10 @@ dotenv = require("dotenv").config();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-///// Declaring Routes
+// Declaring Routes
 getUsers = require("./routes/getAlluser");
+signup = require("./routes/signup");
+login = require("./routes/login");
 
 //PORT ENVIRONMENT VARIABLE  MONGODB Connect
 const port = process.env.PORT;
@@ -26,19 +28,20 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-/////  view engine setup
+//  view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-///// Routes to use
+// Routes to use
 
 app.use("/", indexRouter);
 app.use("/api/user/getallusers", getUsers);
+app.use("/api/user/signup", signup);
 
-////// Starter and Error Listen Statesments
+// Starter and Error Listen Statesments
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}..`);
