@@ -40,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/api/user/getallusers", getUsers);
 app.use("/api/user/signup", signup);
+app.use("/api/user/login", login);
 
 // Starter and Error Listen Statesments
 

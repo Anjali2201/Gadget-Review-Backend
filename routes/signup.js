@@ -29,7 +29,7 @@ router.post("/", async function (req, res, next) {
   } catch (err) {
     return console.log(err);
   }
-  return res.status(201).json({ user });
+  return res.status(201).json({ user, message: "User Created" });
 });
 
 module.exports = router;
