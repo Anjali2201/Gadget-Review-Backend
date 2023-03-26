@@ -7,6 +7,7 @@ var mongoose = require("mongoose");
 var cors = require("cors");
 var app = express();
 var indexRouter = require("./routes/index");
+const { create } = require("./models/User");
 dotenv = require("dotenv").config();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,6 +18,12 @@ getUsers = require("./routes/getAlluser");
 signup = require("./routes/signup");
 login = require("./routes/login");
 getAllPost = require("./routes/getAllPost");
+createpost = require("./routes/createPost");
+deletePost = require("./routes/deletePost");
+getPostByUserName = require("./routes/getpostbyusername");
+likepost = require("./routes/likepost");
+postcomments = require("./routes/postcomments");
+count = require("./routes/getcount");
 
 //PORT ENVIRONMENT VARIABLE  MONGODB Connect
 const port = process.env.PORT;
@@ -42,11 +49,20 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes to use
 
+// User Routes
 app.use("/", indexRouter);
 app.use("/api/user/getallusers", getUsers);
 app.use("/api/user/signup", signup);
 app.use("/api/user/login", login);
+
+// Post Routes
 app.use("/api/post/getallposts", getAllPost);
+app.use("/api/post/createpost", createpost);
+// app.use("/api/post/delete/:id", deletePost);
+app.use("/api/post/getpostbyusername", getPostByUserName);
+// app.use("/api/post/like/:id", likepost);
+// app.use("/api/post/comment/:id", postcomments);
+app.use("/api/post/getcount", count);
 
 // Starter and Error Listen Statesments
 
