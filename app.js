@@ -41,8 +41,8 @@ app.listen(port, () => {
 });
 
 //  view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
@@ -60,7 +60,7 @@ app.use("/api/post/getallposts", getAllPost);
 app.use("/api/post/createpost", createpost);
 // app.use("/api/post/delete/:id", deletePost);
 app.use("/api/post/getpostbyusername", getPostByUserName);
-// app.use("/api/post/like/:id", likepost);
+app.use("/api/post/like", likepost);
 // app.use("/api/post/comment/:id", postcomments);
 app.use("/api/post/getcount", count);
 

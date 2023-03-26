@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const Post = require("../models/Post");
 
-router.get("/", async function (req, res, next) {
+router.post("/:id", async (req, res) => {
   const { id } = req.params;
   const { email } = req.body;
   let post;
