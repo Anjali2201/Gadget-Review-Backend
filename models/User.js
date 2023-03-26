@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-
+const mongoose = require("mongoose");
+require("mongoose-type-email");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -18,5 +18,6 @@ const userSchema = new Schema({
     minlength: 6,
   },
 });
-export default mongoose.model("User", userSchema);
-// users
+
+const User = mongoose.model("User", UserSchema);
+module.exports = User;

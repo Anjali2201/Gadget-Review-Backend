@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-
+const mongoose = require("mongoose");
+require("mongoose-type-email");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
@@ -51,4 +51,5 @@ const postSchema = new Schema({
   },
 });
 
-export default mongoose.model("Post", postSchema);
+const Post = mongoose.model("Post", postSchema);
+module.exports = Post;
