@@ -29,8 +29,8 @@ mongoose
   .catch((err) => console.log(err));
 
 //  view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
