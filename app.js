@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 getUsers = require("./routes/getAlluser");
 signup = require("./routes/signup");
 login = require("./routes/login");
+getAllPost = require("./routes/getAllPost");
 
 //PORT ENVIRONMENT VARIABLE  MONGODB Connect
 const port = process.env.PORT;
@@ -45,6 +46,7 @@ app.use("/", indexRouter);
 app.use("/api/user/getallusers", getUsers);
 app.use("/api/user/signup", signup);
 app.use("/api/user/login", login);
+app.use("/api/post/getallposts", getAllPost);
 
 // Starter and Error Listen Statesments
 
