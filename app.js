@@ -22,8 +22,8 @@ createpost = require("./routes/createPost");
 deletePost = require("./routes/deletePost");
 getPostByUserName = require("./routes/getpostbyusername");
 likepost = require("./routes/likepost");
-postcomments = require("./routes/postcomments");
 count = require("./routes/getcount");
+comments = require("./routes/postcomments");
 
 //PORT ENVIRONMENT VARIABLE  MONGODB Connect
 const port = process.env.PORT;
@@ -58,11 +58,11 @@ app.use("/api/user/login", login);
 // Post Routes
 app.use("/api/post/getallposts", getAllPost);
 app.use("/api/post/createpost", createpost);
-// app.use("/api/post/delete/:id", deletePost);
+app.use("/api/post/delete", deletePost);
 app.use("/api/post/getpostbyusername", getPostByUserName);
 app.use("/api/post/like", likepost);
-// app.use("/api/post/comment/:id", postcomments);
 app.use("/api/post/getcount", count);
+app.use("/api/post/comment", comments);
 
 // Starter and Error Listen Statesments
 
