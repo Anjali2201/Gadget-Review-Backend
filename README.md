@@ -1,4 +1,4 @@
-# Gadget Review backend
+# The GadgetLab backend
 
 ## API's
 
