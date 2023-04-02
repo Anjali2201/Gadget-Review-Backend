@@ -1,11 +1,10 @@
 {
-    "version": 2,
-    "name": "gadget-reviewer",
-    "builds": [
-      { "src": "app.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "/app.js" }
-    ]
-  }
-  
+  "version": 2,
+  "name": "name-of-your-vercel-app",
+  "builds": [
+    { "src": "script.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.js" }
+  ]
+}
