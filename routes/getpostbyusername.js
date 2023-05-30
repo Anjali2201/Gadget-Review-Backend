@@ -3,10 +3,10 @@ var router = express.Router();
 const Post = require("../models/Post");
 
 router.get("/", async function (req, res, next) {
-  const { email } = req.body;
+  const userEmail = req.query.email;
   let posts;
   try {
-    posts = await Post.find({ authoremail: email });
+    posts = await Post.find({ authoremail: userEmail });
   } catch (err) {
     console.log(err);
   }
