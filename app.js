@@ -1,7 +1,6 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-var cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var cors = require("cors");
@@ -66,7 +65,6 @@ app.use("/api/post/comment", comments);
 
 // Starter and Error Listen Statesments
 
-//catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
